@@ -236,7 +236,7 @@ export const handler = async (event, context) => {
 
 
 
-7. AWS Cognito 사용
+8. AWS Cognito 사용
    - 웹과 앱에 대한 인증, 권한 부여 및 사용자 관리 서비스임.
 
      개발자는 손쉽게 애플리케이션에 사용자 인증, 권한 부여, 사용자 데이터 관리
@@ -256,5 +256,7 @@ export const handler = async (event, context) => {
         - 이를 통해서 애플리케이션은 인증된 사용자에게 특정 AWS 서비스(DynamoDB 등)
           에 접근할 수 있는 자격 증명을 부여할 수 있음.
 
-
-
+8.1
+    api name : cognito_api_test
+               cognito 등록 필요함.
+    Lambda name : cognito_lambda_test
