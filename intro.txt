@@ -218,4 +218,43 @@ export const handler = async (event, context) => {
   };
 };
 
+   - eventTestFunction Lambda test
+     DynamoDB 에 test 데이터가 등록된 결과 확인.
+     => 데이터가 정상적으로 등록이 되었다면, Lambda code 에 문제가 없음.
+
+
+7.2 eventBridge 연결
+   - 규칙명 : dynamodb-1min-insert-timer
+   - 규칙 설명 : 1minute teimer
+   - 규칙 유형 : 예약 표현식
+   - 예약 표현식 : rate(1 minute)
+
+
+7.3 DynamoDB 에서 1분 단위로 데이터가 등록이 되는지 확인.
+
+
+
+
+
+7. AWS Cognito 사용
+   - 웹과 앱에 대한 인증, 권한 부여 및 사용자 관리 서비스임.
+
+     개발자는 손쉽게 애플리케이션에 사용자 인증, 권한 부여, 사용자 데이터 관리
+     기능을 통합할 수 있음.
+
+   - 두 가지 구성 요소
+     
+     사용자 풀(User Pool)
+        - 애플리케이션 사용자를 관리.
+        - 이 풀에서 제공하는 기능은 등록, 로그인, 로그아웃, 비밀번호 재설정, MFA
+        - 사용자 그룹 정책을 정의하여 각 사용자에 대해 맞춤형 권한 설정
+        - 사용자 인증을 완료하면 Cognito 는 JWT 를 사용자에게 반환함.
+          이 JWT 는 API Gateway 에서 자격증명으로 사용할 수 있음.
+     자격 증명 풀(Identity Pool)
+        - 애플리케이션이 AWS 리소스에 접근할 수 있도록 하는 권한 관리 시스템
+        - 사용자가 인증되었는지 여부에 따라 서로 다른 권한을 부여할 수 있음.
+        - 이를 통해서 애플리케이션은 인증된 사용자에게 특정 AWS 서비스(DynamoDB 등)
+          에 접근할 수 있는 자격 증명을 부여할 수 있음.
+
+
 
