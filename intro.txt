@@ -119,6 +119,103 @@
 
 6. Lambda 및 DynamoDB 를 사용한 CRUD HTTP API 작성
 
+AWS 자습서 URL
 https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/http-api-dynamo-db.html
 
-6.1 DynamoDB 테이블 생성
+1단계: DynamoDB 테이블 생성
+2단계: Lambda 함수 생성
+3단계: HTTP API 생성
+4단계: 경로 생성
+5단계: 통합 생성
+6단계: 경로에 통합 연결
+7단계: API 테스트
+
+전체 조회 : get
+https://lf2afyx6f6.execute-api.us-east-1.amazonaws.com/items
+
+등록 : put
+https://lf2afyx6f6.execute-api.us-east-1.amazonaws.com/items
+{
+    "id" : "2222",
+    "price" : 1000,
+    "name" : "name2"
+}
+
+한건 조회 : get
+https://lf2afyx6f6.execute-api.us-east-1.amazonaws.com/items/2222
+
+삭제 : delete
+https://lf2afyx6f6.execute-api.us-east-1.amazonaws.com/items/2222
+
+
+8단계: 정리
+
+
+
+
+7. Lambda 의 eventBridge 사용
+
+1분마다 DynamoDB 의 지정된 테이블에 데이터 등록하는 기능을 구현.
+
+1분마다 : 스케줄링을 위해서 eventBridge 를 Lambda에 연결
+
+
+7.1 테스트용 Lambda 생성
+   - Lambda name : eventTestFunction
+   - 자습서의 코드를 복붙
+   - 기존의 CURD 에서 C 를 제외한 나머지 코드는 모두 삭제
+
+   - 참고 : AWS API 문서 보기
+     Amazon DynamoDB 의 클라이언트 사용
+     https://docs.aws.amazon.com/ko_kr/sdk-for-javascript/v3/developer-guide/dynamodb-example-dynamodb-utilities.html
+     
+아래는 Lambda 코드임.
+
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import {
+  DynamoDBDocumentClient,
+  PutCommand,
+} from "@aws-sdk/lib-dynamodb";
+
+const client = new DynamoDBClient({});
+
+const dynamo = DynamoDBDocumentClient.from(client);
+
+const tableName = "http-crud-tutorial-items";
+
+export const handler = async (event, context) => {
+  let body;
+  let statusCode = 200;
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  try {
+        await dynamo.send(
+          // 테이블에 항목 등록
+          new PutCommand({
+            TableName: tableName,
+            Item: {
+              // id 를 자동으로 생성하도록 해야 함.
+              id: String(Date.now()),
+              price: 1000,
+              name: "item name",
+            },
+          })
+        );
+        body = `Put item ${String(Date.now())}`;
+  } catch (err) {
+    statusCode = 400;
+    body = err.message;
+  } finally {
+    body = JSON.stringify(body);
+  }
+
+  return {
+    statusCode,
+    body,
+    headers,
+  };
+};
+
+
