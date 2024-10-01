@@ -257,7 +257,7 @@ export const handler = async (event, context) => {
           에 접근할 수 있는 자격 증명을 부여할 수 있음.
 
 8.1 Cognito 로 로그인 과정
-    1.1 흐름
+    8.1 흐름
         - 인증 및 인가 과정이 없는 형태
           client( PostMan ) -> apiGateway -> Lamda
         - 인증 및 인가를 추가
@@ -265,7 +265,7 @@ export const handler = async (event, context) => {
           apiGateway( accessKey 확인 ) -> 
           Lamda
 
-    1.2 서비스(인증 및 인가) 구축 과정
+    8.2 서비스(인증 및 인가) 구축 과정
         - Lamda 생성
         - api Gateway 생성
         - api Gateway + Lamda 통합
@@ -279,7 +279,7 @@ export const handler = async (event, context) => {
         - AWS Cognito 사용자 생성 및 tokent 확인
         - PostMan 서비스 요청 with accessToken
 
-    1.3 Cognito 생성 과정
+    8.3 Cognito 생성 과정
         - 1단계 : 로그인 환경 구성
                   사용자가 로그인할 때 사용할 수 있는 자격증명 공급자를 구성.
                   - AWS Cognito 만 사용하는 것으로 설정.
@@ -329,7 +329,7 @@ export const handler = async (event, context) => {
         - 6단계 : 검토 및 생성
                   전 단계에서 설정했던 내용을 확인 후 사용자 풀 생성하면 됨.
 
-    1.4 Cognito 에서 사용자 ID 생성 및 token 정보 확인
+    8.4 Cognito 에서 사용자 ID 생성 및 token 정보 확인
         가입 후 반환되는 access token 으로 AWS API Gateway 테스트를 해야 함.
 
         - 생성한 user pool 선택
@@ -344,7 +344,7 @@ export const handler = async (event, context) => {
         - 5단계에서 설정한 콜백 URL 로 이동됨.
           URL 에 수신된 token 정보를 확인 및 메모장에 복사.
 
-    1.5 ApiGateway 에 Cognito 권한 부여자 연결
+    8.5 ApiGateway 에 Cognito 권한 부여자 연결
         - 권한 부여자를 연결한 ApiGateway 선택
         - 왼쪽 메뉴에서 Develop > Authorization 을 선택
         - 라우팅 선택. GET 선택
@@ -364,4 +364,4 @@ export const handler = async (event, context) => {
                클라이언트 앱 목록 중에서 하나를 선택.
                현재는 하나만 있음. 클라이언트 ID 를 선택해서 사용.
 
-    1.6 PostMan 서비스 요청 with accessToken
+    8.6 PostMan 서비스 요청 with accessToken
