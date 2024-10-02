@@ -367,7 +367,7 @@ export const handler = async (event, context) => {
     8.6 PostMan 서비스 요청 with accessToken
 
 
-9. serverless - kanban board 프로젝트
+9. serverless 이행 - kanban board 애플리케이션
    
    메일 주소 :   diversim90@naver.com
    제목 :       [메가존클라우드] serverless 이행 과제 - 본인 이름
