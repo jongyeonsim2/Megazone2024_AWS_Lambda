@@ -381,6 +381,7 @@ export const handler = async (event, context) => {
                   K8S_Migration
                     - lamda_src
                     - front_end_src
+                    - deploy
                     - test_result
                     - report
 
@@ -390,10 +391,10 @@ export const handler = async (event, context) => {
                      html, css, javascript 등
                   3. deploy 
                      CORS, S3 등의 설정 관련 내용
-                  3. test_result 폴더
+                  4. test_result 폴더
                      - Rest API 별 테스트 결과 캡쳐 화면을 간단한 보고서 형식으로 작성
                      - kanban board 애플리케이션 실행 화면
-                  4. report 폴더
+                  5. report 폴더
                      시스템 아키텍처 구성과 관련된 문서
                      - 서버리스 아키텍처 전체 구성도 및 설명
                        ( S3 등 배포 구성도 및 설명 도 포함 )
